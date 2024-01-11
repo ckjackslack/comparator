@@ -1,0 +1,30 @@
+[[package]]
+name = "prettytable"
+version = "2.5.0"
+description = "A simple Python library for easily displaying tabular data in a visually appealing ASCII table format"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+wcwidth = "*"
+
+[package.extras]
+tests = ["pytest", "pytest-cov", "pytest-lazy-fixture"]
+
+[[package]]
+name = "wcwidth"
+version = "0.2.6"
+description = "Measures the displayed width of unicode strings in a terminal"
+category = "main"
+optional = false
+python-versions = "*"
+
+[metadata]
+lock-version = "1.1"
+python-versions = "^3.8"
+content-hash = "83b7fc93f183d8b8e01aa48111a10cdd458f7db29923d0b8bbf070c2397439e4"
+
+[metadata.files]
+prettytable = []
+wcwidth = []
