@@ -12,15 +12,17 @@ from comparator.models import Entry, EntryKind
 def is_excluded(rel_path: str, patterns: Iterable[str]) -> bool:
     """True if ``rel_path`` (``/``-separated) matches any glob pattern.
 
-    A pattern matches either the whole relative path (``build/*.o``) or any
-    single path component (``__pycache__``, ``*.tmp``).
+    A pattern matches either the relative path or one of its parent paths
+    (``build/*.o``, ``docs/drafts``) or any single path component
+    (``__pycache__``, ``*.tmp``). Matching is case-sensitive.
     """
     parts = rel_path.split("/")
+    prefixes = ["/".join(parts[: i + 1]) for i in range(len(parts))]
     for pattern in patterns:
         pattern = pattern.strip().strip("/")
         if not pattern:
             continue
-        if fnmatch.fnmatchcase(rel_path, pattern):
+        if any(fnmatch.fnmatchcase(prefix, pattern) for prefix in prefixes):
             return True
         if any(fnmatch.fnmatchcase(part, pattern) for part in parts):
             return True
